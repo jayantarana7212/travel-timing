@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const busRoutes = require('./routes/busRoutes');
 const app = express();
-
+const cors = require('cors'); // Add this line
 const port = 4000;
 
 require('dotenv').config();
@@ -18,6 +18,9 @@ mongoose.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true
 });
 
+app.use(cors({
+    origin: '*' // Adjust this to your frontend domain if needed
+}));
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
