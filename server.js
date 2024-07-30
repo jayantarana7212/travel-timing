@@ -6,7 +6,8 @@ const path = require('path');
 const busRoutes = require('./routes/busRoutes');
 const app = express();
 const cors = require('cors'); // Add this line
-const port = 4000;
+// const port = 4000;edit
+const port = process.env.PORT || 4000;
 
 require('dotenv').config();
 
@@ -27,7 +28,7 @@ db.once('open', () => {
     console.log('Connected to MongoDB Atlas');
 });
 
-app.use('/', busRoutes);
+app.use('/search', busRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
